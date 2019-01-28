@@ -1,0 +1,84 @@
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="text-center">Listado de Reclamos</h1>
+			<table class="table table-sm table-hover">
+				<thead class="text-center">
+					<th>Titulo</th>
+					<th>Texto</th>
+					<th>Locacion</th>
+					<th>Operaciones</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of recLista; let i = index">
+						<td>{{ item.titulo }}</td>
+						<td>{{ item.texto }}</td>
+						<td>{{ item.locacion }}</td>
+						<td>
+							<a class="btn btn-primary" (click)="editar(item)">
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+								Editar
+							</a>
+							
+							<a class="btn btn-danger" (click)="eliminar(item)">
+								<i class="fa fa-trash" aria-hidden="true"></i> 
+								Eliminar
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-4">
+			<h1 class="text-center">Formulario</h1>
+			<form #reclamoForm="ngForm" (ngSubmit)="onSubmit(reclamoForm)">
+				<input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="servicio.selectedReclamo.$key">
+				<div class="form-group">
+					<label>Titulo</label>
+					<input class="form-control" 
+					       name="titulo" 
+					       #name="ngModel" 
+					       [(ngModel)]="servicio.selectedReclamo.titulo"
+						   placeholder="Titulo"
+						   required=""
+					       >
+				</div>
+
+				<div class="form-group">
+					<label>Texto</label>
+					<input class="form-control" 
+					       name="texto" 
+					       #position="ngModel" 
+					       [(ngModel)]="servicio.selectedReclamo.texto"
+						   placeholder="Texto"
+						   required=""
+					       >
+				</div>				
+
+				<div class="form-group">
+					<label>Locacion</label>
+					<div class="input-group">
+						<input class="form-control" 
+					       name="locacion" 
+					       #salary="ngModel" 
+					       [(ngModel)]="servicio.selectedReclamo.locacion"
+						   placeholder="Locacion"
+						   required=""
+					       >
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<button class="btn btn-primary btn-block" type="submit" [disabled]="!reclamoForm.valid">
+						<i class="fa fa-floppy-o" aria-hidden="true"></i> Grabar
+					</button>
+
+					<button class="btn btn-danger btn-block" type="button" (click)="resetForm(reclamoForm)">
+						<i class="fa fa-floppy-o" aria-hidden="true"></i> Limpiar
+					</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
